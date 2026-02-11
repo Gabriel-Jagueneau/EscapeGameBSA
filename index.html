@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Game - 2026/2027</title>
+    <link rel="icon" href="storage/images/bsa.png">
+
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+    <svg style="position: absolute; width: 0; height: 0;">
+        <filter id="glitch-filter">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" />
+        </filter>
+    </svg>
+    
+    <div class="browser-header">
+
+        <div class="tab-bar">
+            <div class="tab active">
+                <div class="front">
+                    <img src="storage/images/bsa.png" alt="" class="logo">
+                    <span>Portail d'authentification</span>
+                </div>
+                <div class="tab-close">×</div>
+            </div>
+            <div class="tab">
+                <div class="front">
+                    <img src="storage/images/pepite.png" alt="" class="logo">
+                    <span>Pépite ECA | Bienvenue</span>
+                </div>
+                <div class="tab-close">×</div>
+            </div>
+            <div class="tab">
+                <div class="front">
+                    <img src="storage/images/microsoft.png" alt="" class="logo">
+                    <span>Se connecter</span>
+                </div>
+                <div class="tab-close">×</div>
+            </div>
+        </div>
+        
+        <div class="toolbar">
+            <div class="nav-buttons">
+                <img src="storage/icons/arrow-left.png" alt="" class="logo-2">
+                <img src="storage/icons/arrow-right.png" alt="" class="logo-2">
+                <img src="storage/icons/rotate-cw.png" alt="" class="logo-2" onclick="resetGame()">
+                <img src="storage/icons/house.png" alt="" class="logo-2">
+            </div>
+            <div class="address-bar">
+                <div class="icon first-icon">
+                    <img src="storage/icons/settings-2.png" alt="" class="logo-3">
+                </div>
+                <div class="icon warning-icon">
+                    <img src="storage/icons/lock-open.png" alt="" class="logo-3">
+                </div>
+                <div class="search">
+                    http://auth.agro-bondeaux.fr/cas/login
+                </div>
+                <div class="icon last-icon">
+                    <img src="storage/icons/star.png" alt="" class="logo-3">
+                </div>
+            </div>
+            <div class="profile-section">
+                <img src="storage/icons/arrow-down-to-line.png" alt="" class="logo-2">
+                <img src="storage/icons/user.png" alt="" class="logo-2">
+                <span></span>
+                <img src="storage/icons/maximize.png" onclick="openFullscreen()" alt="" class="logo-2">
+                <img src="storage/icons/ellipsis-vertical.png" alt="" class="logo-2">
+            </div>
+        </div>
+    </div>
+
+    <div class="browser-content" id="main-content">
+        <div class="glitch-container"></div>
+
+        <div id="section-login" class="section">
+            <img src="storage/images/logo_bsa.png" alt="" class="logo-login">
+            <h2>Veuillez vous authentifier</h2>
+            <div class="auth-golb">
+                <div class="group-auth">
+                    <img src="storage/icons/user-fill.png" alt="" class="logo-4 icon-pass">
+                    <input type="text" id="login-user" placeholder="Identifiant">
+                </div>
+                <div class="group-auth">
+                    <img src="storage/icons/lock-fill.png" alt="" class="logo-4 icon-pass">
+                    <input type="password" id="login-pass" placeholder="Mot de passe">
+                </div>
+                <div class="group-auth">
+                    <div class="group-checkbox">
+                        <input type="checkbox" class="checkbox">
+                    </div>
+                    <div class="checkbox-label">Voir mes dernières connexions</div>
+                  </div>
+            </div>
+            <button onclick="attemptLogin()">
+                <img src="storage/icons/log-in-white.png" alt="" class="logo-small">
+                Se connecter
+            </button>
+            <div class="forget-pass">
+                <img src="storage/icons/ambulance-fill-white.png" alt="" class="logo-small">
+                Mot de passe oublié ?
+            </div>
+            <div class="warning-section">
+                <span>Attention au risque d'usurpation de votre "Compte BxScAgro" !</span>
+                <span>Avant de saisir votre mot de passe, vérifiez que l'url affichée dans la barre d'adresse du navigateur commence bien par : <div class="link-warning">http://auth.agro-bondeaux.fr</div></span>
+            </div>
+        </div>
+
+        <div id="section-video-intro" class="section">
+            <div id="terminal" class="background-section"></div>
+            <video id="vid-intro" src="https://www.w3schools.com/html/mov_bbb.mp4" playsinline></video>
+        </div>
+
+        <div id="section-timer" class="section">
+            <canvas id="matrix" class="background-section"></canvas>
+
+            <div class="container-timer">
+                <h1>Désamorçage</h1>
+                <p>Entrez le code de sécurité pour arrêter le compte à rebours.</p>
+                <div id="timer-display">00:00</div>
+                <div class="desamorcage-code">
+                    <input type="text" id="code-input" placeholder="Code">
+                    <button class="button-code-input" onclick="checkCode()">Valider</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-success" class="section">
+            <div class="background-section" id="success">
+                <div class="layer layer-slow"><div class="particles"></div></div>
+                <div class="layer layer-fast"><div class="particles"></div></div>
+                <div class="glow"></div>
+            </div>
+            <video id="vid-success" src="https://www.w3schools.com/html/mov_bbb.mp4" playsinline></video>
+        </div>
+
+        <div id="section-fail" class="section">
+            <div class="background-section" id="fail">
+                <div class="layer layer-slow"><div class="particles"></div></div>
+                <div class="layer layer-fast"><div class="particles"></div></div>
+                <div class="glow"></div>
+            </div>
+            <video id="vid-fail" src="https://www.w3schools.com/html/mov_bbb.mp4" playsinline></video>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+</html>
