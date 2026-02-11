@@ -1,6 +1,6 @@
 const STORAGE_KEY_STATE = 'plintzy_game_state_v4';
 const STORAGE_KEY_TIME = 'plintzy_target_time_v4';
-const TIMER_DURATION_MS = 0.1 * 60 * 1000; 
+const TIMER_DURATION_MS = 45 * 60 * 1000; 
 
 const contentDiv = document.getElementById('main-content');
 const sections = {
