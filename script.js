@@ -113,49 +113,57 @@ function startCountdownLogic() {
     stressAudio.loop = false;
 
     timerInterval = setInterval(() => {
+        const targetStr = localStorage.getItem(STORAGE_KEY_TIME);
+        if (!targetStr) return;
+
+        const target = parseInt(targetStr);
+        const now = Date.now();
+        const diff = target - now;
         const timeLeftInAudio = stressAudio.duration - stressAudio.currentTime;
 
-        if (isFinished || (parseInt(localStorage.getItem(STORAGE_KEY_TIME)) - Date.now() <= 0)) {
-            
+        if (isFinished || diff <= 0) {
             if (!isFinished) {
                 timerText.textContent = "00:00";
                 timerText.classList.add('blink');
             }
 
-            if (timeLeftInAudio <= 2 || stressAudio.ended) {
-                clearInterval(timerInterval);
-                if (isFinished) {
-                    triggerSuccess();
-                } else {
-                    triggerFail();
+            if (!isNaN(stressAudio.duration)) {
+                if (timeLeftInAudio <= 2 || stressAudio.ended) {
+                    clearInterval(timerInterval);
+                    isFinished ? triggerSuccess() : triggerFail();
+                    return;
                 }
-                return;
             }
         }
 
-        if (!isFinished) {
-            const target = parseInt(localStorage.getItem(STORAGE_KEY_TIME));
-            const now = Date.now();
-            const diff = target - now;
+        if (!isFinished && diff > 0) {
+            const minutes = Math.floor(diff / 60000);
+            const seconds = Math.floor((diff % 60000) / 1000);
+            timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-            if (diff > 0) {
-                const minutes = Math.floor(diff / 60000);
-                const seconds = Math.floor((diff % 60000) / 1000);
-                timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if ((minutes === 30 || minutes === 15) && seconds === 0) {
+                bellAudio.play().catch(() => {});
+            }
 
-                if ((minutes === 30 || minutes === 15) && seconds === 0) {
-                    bellAudio.play().catch(e => {});
-                }
+            if (diff <= 5 * 60 * 1000) {
+                timerText.style.color = "red";
+                
+                if (stressAudio.paused) {
+                    stressAudio.volume = 0.5;
+                    const offset = (5 * 60) - (diff / 1000);
 
-                if (diff <= 5 * 60 * 1000) {
-                    timerText.style.color = "red";
-                    if (stressAudio.paused) {
-                        stressAudio.volume = 0.5;
-                        const offset = (5 * 60) - (diff / 1000);
+                    if (stressAudio.readyState >= 1) {
                         stressAudio.currentTime = offset;
-                        stressAudio.play().catch(e => {});
+                        stressAudio.play().catch(e => console.warn("Autoplay bloqué au refresh"));
+                    } else {
+                        stressAudio.addEventListener('loadedmetadata', () => {
+                            stressAudio.currentTime = offset;
+                            stressAudio.play().catch(() => {});
+                        }, { once: true });
                     }
                 }
+            } else {
+                timerText.style.color = "#fff";
             }
         }
     }, 1000);
@@ -189,14 +197,17 @@ function checkCode() {
         timerText.classList.remove('blink');
         
         if (stressAudio.duration) {
-            stressAudio.currentTime = stressAudio.duration - 10;
-            stressAudio.play().catch(e => console.log("Audio play error"));
+            stressAudio.currentTime = stressAudio.duration - 11;
+            stressAudio.play()
         }
 
     } else {
         const inp = document.getElementById('code-input');
         inp.classList.add('shake');
-        setTimeout(() => inp.classList.remove('shake'), 500);
+        setTimeout(() => {
+            inp.classList.remove('shake');
+            inp.value = '';
+        }, 500);
     }
 }
 
@@ -210,7 +221,7 @@ function triggerFail() {
     activateGlitchMode(true); 
     setTimeout(() => {
         activateGlitchMode(false);
-    }, 500);
+    }, 250);
     
     const vid = document.getElementById('vid-fail');
     if (vid) { 
