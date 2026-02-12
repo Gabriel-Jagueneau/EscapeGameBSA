@@ -104,10 +104,12 @@
                 <img src="storage/icons/ambulance-fill-white.png" alt="" class="logo-small">
                 Mot de passe oublié ?
             </div>
+            <!---->
             <div class="warning-section">
                 <span>Attention au risque d'usurpation de votre "Compte BxScAgro" !</span>
-                <span>Avant de saisir votre mot de passe, vérifiez que l'url affichée dans la barre d'adresse du navigateur commence bien par : <div class="link-warning">http://auth.agro-bondeaux.fr</div></span>
+                <span>Avant de saisir votre mot de passe, vérifiez que l'url affichée dans la barre d'adresse du navigateur commence bien par : <img src="storage/images/authinfourl.png" alt=""></span>
             </div>
+            
         </div>
 
         <div id="section-video-intro" class="section">
@@ -119,8 +121,11 @@
             <canvas id="matrix" class="background-section"></canvas>
 
             <div class="container-timer">
-                <h1>Désamorçage</h1>
-                <p>Entrez le code de sécurité pour arrêter le compte à rebours.</p>
+                <audio id="snd-bell" src="storage/sounds/bell.mp3" preload="auto"></audio>
+                <audio id="snd-stress" src="storage/sounds/pression.mp3" preload="auto"></audio>
+
+                <h1>Destruction des données</h1>
+                <p>Saisissiez le mot de passe pour sauver les projets.</p>
                 <div id="timer-display">00:00</div>
                 <div class="desamorcage-code">
                     <input type="text" id="code-input" placeholder="Code">

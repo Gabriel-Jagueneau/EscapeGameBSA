@@ -1,6 +1,6 @@
 const STORAGE_KEY_STATE = 'plintzy_game_state_v4';
 const STORAGE_KEY_TIME = 'plintzy_target_time_v4';
-const TIMER_DURATION_MS = 45 * 60 * 1000; 
+const TIMER_DURATION_MS = 0.5 * 60 * 1000; 
 
 const contentDiv = document.getElementById('main-content');
 const sections = {
@@ -10,8 +10,12 @@ const sections = {
     fail: document.getElementById('section-fail'),
     success: document.getElementById('section-success')
 };
+
 const timerDisplay = document.getElementById('timer-display');
 let timerInterval;
+
+let glitchTimeout;
+let isFinished = false;
 
 function init() {
     const state = localStorage.getItem(STORAGE_KEY_STATE) || 'login';
@@ -65,13 +69,8 @@ function transitionToIntro() {
         showSection('intro');
 
         const vid = document.getElementById('vid-intro');
-
-        // On s'assure que la vidéo est visible et que le terminal ne la cache pas
         vid.style.display = 'block';
-
         vid.play();
-        
-        // Déclenche la suite UNIQUEMENT quand la vidéo est finie
         vid.onended = () => {
             transitionToTimer();
         };
@@ -94,32 +93,102 @@ function transitionToTimer() {
         
         localStorage.setItem(STORAGE_KEY_STATE, 'timer');
         showSection('timer');
+        
         startCountdownLogic();
+        scheduleRandomGlitch();
 
-    }, 250); // glitch
+    }, 250);
 }
 
 function startCountdownLogic() {
     clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-        const target = parseInt(localStorage.getItem(STORAGE_KEY_TIME));
-        const now = Date.now();
-        const diff = target - now;
+    const stressAudio = document.getElementById('snd-stress');
+    const bellAudio = document.getElementById('snd-bell');
+    const timerText = document.getElementById('timer-display');
+    
+    stressAudio.loop = false;
 
-        if (diff <= 0) {
-            triggerFail();
-        } else {
-            const minutes = Math.floor(diff / 60000);
-            const seconds = Math.floor((diff % 60000) / 1000);
-            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    timerInterval = setInterval(() => {
+        const timeLeftInAudio = stressAudio.duration - stressAudio.currentTime;
+
+        if (isFinished || (parseInt(localStorage.getItem(STORAGE_KEY_TIME)) - Date.now() <= 0)) {
+            
+            if (!isFinished) {
+                timerText.textContent = "00:00";
+                timerText.classList.add('blink');
+            }
+
+            if (timeLeftInAudio <= 2 || stressAudio.ended) {
+                clearInterval(timerInterval);
+                if (isFinished) {
+                    triggerSuccess();
+                } else {
+                    triggerFail();
+                }
+                return;
+            }
+        }
+
+        if (!isFinished) {
+            const target = parseInt(localStorage.getItem(STORAGE_KEY_TIME));
+            const now = Date.now();
+            const diff = target - now;
+
+            if (diff > 0) {
+                const minutes = Math.floor(diff / 60000);
+                const seconds = Math.floor((diff % 60000) / 1000);
+                timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if ((minutes === 30 || minutes === 15) && seconds === 0) {
+                    bellAudio.play().catch(e => {});
+                }
+
+                if (diff <= 5 * 60 * 1000) {
+                    timerText.style.color = "red";
+                    if (stressAudio.paused) {
+                        stressAudio.volume = 0.5;
+                        const offset = (5 * 60) - (diff / 1000);
+                        stressAudio.currentTime = offset;
+                        stressAudio.play().catch(e => {});
+                    }
+                }
+            }
         }
     }, 1000);
 }
 
+function scheduleRandomGlitch() {
+    const randomDelay = Math.floor(Math.random() * (25000 - 15000 + 1) + 15000);
+    clearTimeout(glitchTimeout);
+
+    glitchTimeout = setTimeout(() => {
+        if (localStorage.getItem(STORAGE_KEY_STATE) === 'timer') {
+            
+            contentDiv.classList.add('glitch-active');
+            setTimeout(() => {
+                contentDiv.classList.remove('glitch-active');
+                scheduleRandomGlitch();
+            }, 200);
+        }
+    }, randomDelay);
+}
+
 function checkCode() {
     const code = document.getElementById('code-input').value;
-    if (code === '') {
-        triggerSuccess();
+    const stressAudio = document.getElementById('snd-stress');
+    const timerText = document.getElementById('timer-display');
+
+    if (code === '1234') {
+        isFinished = true;
+        
+        timerText.style.color = "rgb(55, 212, 71)";
+        timerText.classList.remove('blink');
+        
+        if (stressAudio.duration) {
+            stressAudio.currentTime = stressAudio.duration - 10;
+            stressAudio.play().catch(e => console.log("Audio play error"));
+        }
+
     } else {
         const inp = document.getElementById('code-input');
         inp.classList.add('shake');
@@ -129,28 +198,34 @@ function checkCode() {
 
 function triggerFail() {
     clearInterval(timerInterval);
+    clearTimeout(glitchTimeout);
+    document.getElementById('snd-stress').pause();
+    
     localStorage.setItem(STORAGE_KEY_STATE, 'fail');
     showSection('fail');
     activateGlitchMode(true); 
-    setTimeout(() => activateGlitchMode(false), 500);
-
+    setTimeout(() => {
+        activateGlitchMode(false);
+    }, 500);
+    
     const vid = document.getElementById('vid-fail');
-    if (vid) {
-        vid.play().catch(e => console.log("Lecture bloquée ou erreur :", e));
-        vid.loop = false;
+    if (vid) { 
+        vid.play(); 
     }
 }
 
 function triggerSuccess() {
     clearInterval(timerInterval);
+    clearTimeout(glitchTimeout);
+    document.getElementById('snd-stress').pause();
+
     localStorage.setItem(STORAGE_KEY_STATE, 'success');
     showSection('success');
     activateGlitchMode(false);
-
+    
     const vid = document.getElementById('vid-success');
-    if (vid) {
-        vid.play().catch(e => console.log("Lecture bloquée ou erreur :", e));
-        vid.loop = false;
+    if (vid) { 
+        vid.play(); 
     }
 }
 
@@ -160,8 +235,24 @@ function activateGlitchMode(active) {
 }
 
 function resetGame() {
+    clearInterval(timerInterval);
+    clearTimeout(glitchTimeout);
+
+    const stressAudio = document.getElementById('snd-stress');
+    const bellAudio = document.getElementById('snd-bell');
+
+    if (stressAudio) {
+        stressAudio.pause();
+        stressAudio.currentTime = 0;
+    }
+    if (bellAudio) {
+        bellAudio.pause();
+        bellAudio.currentTime = 0;
+    }
+
     localStorage.removeItem(STORAGE_KEY_STATE);
     localStorage.removeItem(STORAGE_KEY_TIME);
+
     location.reload();
 }
 
@@ -274,10 +365,8 @@ function addLine() {
     
     window.scrollTo(0, document.body.scrollHeight);
 
-    // Calcul du prochain intervalle entre 50ms et 150ms
     const nextTick = Math.floor(Math.random() * (100 - 0 + 1)) + 50;
     setTimeout(addLine, nextTick);
 }
 
-// Lancement de la première ligne
 addLine();

@@ -280,7 +280,7 @@ body {
     & .warning-section {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 0px;
         flex-direction: column;
         color: #ffffff;
         margin-top: 30px;
@@ -294,15 +294,11 @@ body {
             margin-top: 0;
             padding: 0;
             font-size: 16px;
-            & .link-warning {
-                color: #4f4f4f;
-                background-color: #ececec;
-                font-size: 14px;
-                font-style: normal;
-                font-weight: 100;
+            & img {
+                height: 20px;
+                width: auto;
                 padding: 5px 6px;
-                margin-left: 10px;
-                cursor: pointer;
+                margin-left: 2px;
             }
         }
     }
@@ -597,4 +593,11 @@ canvas {
     0% { background-color: rgba(255,0,0,0.1); }
     50% { background-color: rgba(0,255,0,0.1); }
     100% { background-color: rgba(0,0,255,0.1); }
+}
+
+.blink {
+    animation: blinker 0.5s linear infinite;
+}
+@keyframes blinker {
+    50% { opacity: 0; }
 }
