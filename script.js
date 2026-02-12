@@ -1,6 +1,10 @@
-const STORAGE_KEY_STATE = 'plintzy_game_state_v4';
-const STORAGE_KEY_TIME = 'plintzy_target_time_v4';
-const TIMER_DURATION_MS = 0.5 * 60 * 1000; 
+const code = '';
+const password = '';
+const username = '';
+
+const STORAGE_KEY_STATE = 'game_state';
+const STORAGE_KEY_TIME = 'target_time';
+const TIMER_DURATION_MS = 45 * 60 * 1000; 
 
 const contentDiv = document.getElementById('main-content');
 const sections = {
@@ -45,7 +49,7 @@ function attemptLogin() {
     const u = document.getElementById('login-user');
     const p = document.getElementById('login-pass');
     
-    if (u.value === '' && p.value === '') {
+    if (u.value === username && p.value === password) {
         transitionToIntro();
     } else {
         u.classList.add('shake');
@@ -174,11 +178,11 @@ function scheduleRandomGlitch() {
 }
 
 function checkCode() {
-    const code = document.getElementById('code-input').value;
+    const codeEntered = document.getElementById('code-input').value;
     const stressAudio = document.getElementById('snd-stress');
     const timerText = document.getElementById('timer-display');
 
-    if (code === '1234') {
+    if (codeEntered === code) {
         isFinished = true;
         
         timerText.style.color = "rgb(55, 212, 71)";
