@@ -279,7 +279,7 @@ function openFullscreen() {
         });
     } else if (elem.webkitRequestFullscreen) { /* Safari */
         elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
+    } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
     }
 }
