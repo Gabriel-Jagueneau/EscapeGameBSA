@@ -1,0 +1,231 @@
+/*  ----  */
+
+.browser-header {
+    background-color: #dee1e6;
+    padding-top: 4px;
+}
+
+/*  ----  */
+
+.tab-bar {
+    display: flex;
+    align-items: flex-end;
+    padding-left: 4px;
+    gap: 4px;
+}
+
+.tab {
+    background-color: transparent;
+    height: 36px;
+    width: 240px;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 14px;
+    color: #3c4043;
+    position: relative;
+    cursor: default;
+    background-color: #e2e5e9;
+    & .front {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        & .logo {
+            margin-right: 8px;
+        }
+    }
+    &:hover {
+        background-color: #ebedef;
+        cursor: pointer;
+    }
+}
+
+.tab.active {
+    background-color: #ffffff;
+}
+
+.tab-close {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/*  ----  */
+
+.toolbar {
+    background-color: #ffffff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    gap: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 4px;
+    color: #5f6368;
+    padding-left: 4px;
+}
+
+.addresses-bar {
+    display: flex;
+    flex-grow: 1;
+}
+
+.address {
+    flex-grow: 1;
+    background-color: #f1f3f4;
+    height: 38px;
+    border-radius: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 16px;
+    color: #202124;
+    padding: 0 4px;
+    & .icon {
+        width: 29px;
+        height: 29px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100px;
+        margin-left: 1px;
+    }
+    & .first-icon {
+        background-color: #e0e0e0;
+        margin-right: 10px;
+    }
+    & .last-icon {
+        margin-right: 4px;
+    }
+    & .search {
+        flex-grow: 1;
+        height: auto;
+        align-items: center;
+    }
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-right: 4px;
+    color: #5f6368;
+    & span {
+        width: 2px;
+        height: 20px;
+        margin: 0 8px;
+        border-radius: 100px;
+        background-color: #e0e0e0;
+    }
+}
+
+/*  ----  */
+
+.browers {
+    display: flex;
+    flex-grow: 1;
+}
+
+.browser-content {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & .main-frame {
+        max-width: 600px;
+        width: 100%;
+        position: relative;
+    }
+
+    & h1 {
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    & h2 {
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    & p {
+        font-size: 14px;
+        color: #5f6368;
+        line-height: 1.6;
+        margin-bottom: 24px;
+    }
+
+    & .error-code {
+        font-size: 12px;
+        color: #70757a;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+    }
+
+    & .buttons {
+        display: flex;
+        gap: 12px;
+    }
+
+    & .btn-primary {
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.2s, box-shadow 0.2s;
+        &:hover {
+            background-color: #185abc;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+    }
+
+    & .btn-secondary {
+        background-color: white;
+        color: #1a73e8;
+        border: 1px solid #dadce0;
+        padding: 10px 24px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        &:hover {
+            background-color: #f8f9fa;
+            border-color: #d2d4d7;
+        }
+    }
+}
+
+.section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.section.active {
+    display: flex;
+}
