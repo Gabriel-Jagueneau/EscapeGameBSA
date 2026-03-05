@@ -129,8 +129,8 @@ section {
     width: auto;
     height: 200px;
     background: linear-gradient(to bottom, var(--charcoal) 30%, var(--accent-current) 100%);
-    -webkit-mask-image: url('http://raw.githubusercontent.com/Gabriel-Jagueneau/EscapeGameBSA/refs/heads/main/storage/images/Logo-incubateur.png');
-    mask-image: url('http://raw.githubusercontent.com/Gabriel-Jagueneau/EscapeGameBSA/refs/heads/main/storage/images/Logo-incubateur.png');
+    -webkit-mask-image: url('http://raw.githubusercontent.com/Gabriel-Jagueneau/EscapeGameBSA/refs/heads/main/storage/images/image-incubateur.png');
+    mask-image: url('http://raw.githubusercontent.com/Gabriel-Jagueneau/EscapeGameBSA/refs/heads/main/storage/images/image-incubateur.png');
     -webkit-mask-size: contain;
     mask-size: contain;
     -webkit-mask-repeat: no-repeat;
@@ -143,6 +143,7 @@ section {
     margin: 0 auto;
     color: #555;
     line-height: 1.6;
+    margin-bottom: 40px;
 }
 
 .cta-button {
