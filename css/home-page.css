@@ -126,27 +126,21 @@ section {
 
 /* TITRE : Correction du texte coupé & animation */
 .hero-content .image {
-    width: 100%; /* À ajuster selon votre image */
-    height: 250px;
-    
-    /* 1. On définit le dégradé personnalisé */
+    width: auto;
+    height: 200px;
     background: linear-gradient(to bottom, var(--charcoal) 30%, var(--accent-current) 100%);
-    
-    /* 2. On utilise le PNG comme masque */
     -webkit-mask-image: url('http://raw.githubusercontent.com/Gabriel-Jagueneau/EscapeGameBSA/refs/heads/main/storage/images/Logo-incubateur.png');
     mask-image: url('http://raw.githubusercontent.com/Gabriel-Jagueneau/EscapeGameBSA/refs/heads/main/storage/images/Logo-incubateur.png');
-    
-    /* 3. On centre et on ajuste le masque */
     -webkit-mask-size: contain;
-     mask-size: contain;
-     -webkit-mask-repeat: no-repeat;
-     mask-repeat: no-repeat;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .hero-content p {
     font-size: 24px;
     max-width: 900px;
-    margin: 0 auto 40px;
+    margin: 0 auto;
     color: #555;
     line-height: 1.6;
 }
