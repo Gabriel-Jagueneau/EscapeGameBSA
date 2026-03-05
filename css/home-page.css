@@ -96,7 +96,7 @@ section {
 
 .hero-content {
     z-index: 10;
-    max-width: 1000px;
+    max-width: 1100px;
     opacity: 0; /* Caché par défaut */
     transform: translateY(30px);
     transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
@@ -125,23 +125,26 @@ section {
 }
 
 /* TITRE : Correction du texte coupé & animation */
-.hero-content h1 {
-    font-size: clamp(4rem, 15vw, 9rem);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: -4px;
-    padding: 30px 0; /* Espace pour les accents/descendantes */
+.hero-content .image {
+    width: 300px; /* À ajuster selon votre image */
+    height: 100px;
+    
+    /* 1. On définit le dégradé personnalisé */
     background: linear-gradient(to bottom, var(--charcoal) 30%, var(--accent-current) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block; /* Nécessaire pour le clip */
-    margin-top: 30px;
-    margin-bottom: 30px;
+    
+    /* 2. On utilise le PNG comme masque */
+    -webkit-mask-image: url('storage/images/Logo-incubateur.png');
+    mask-image: url('storage/images/Logo-incubateur.png');
+    
+    /* 3. On centre et on ajuste le masque */
+    -webkit-mask-size: contain;
+     mask-size: contain;
+     -webkit-mask-repeat: no-repeat;
+     mask-repeat: no-repeat;
 }
 
 .hero-content p {
-    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-size: 24px;
     max-width: 900px;
     margin: 0 auto 40px;
     color: #555;
@@ -199,33 +202,45 @@ section {
     padding: 50px;
     opacity: 0; transform: translateX(50px);
     transition: all 0.8s ease 0.3s;
+    & .tag {
+        font-family: Arial, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 16px;
+        color: var(--accent-current);
+        display: block;
+    }
     & h2 {
         font-size: 50px;
         font-weight: 600;
-        margin-top: 10px;
+        margin: 25px 0;
+    }
+    & p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #333;
+    }
+    & .enjeux {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 25px;
+        & .block {
+            background: color-mix(in srgb, var(--accent-current), transparent 40%);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 30px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            width: fit-content;
+        }
     }
 }
 
 .company-section.active .info-box { 
     opacity: 1; 
     transform: translateX(0);
-}
-
-.tag {
-    font-family: Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 0.75rem;
-    color: var(--accent-current);
-    margin-bottom: 20px;
-    display: block;
-}
-
-h2 { 
-    font-size: clamp(2rem, 5vw, 4rem); 
-    font-weight: normal; 
-    margin-bottom: 25px; 
-    line-height: 1.1;
 }
 
 .scroll-indicator {
