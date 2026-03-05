@@ -111,6 +111,9 @@ function startCountdownLogic() {
     const timerText = document.getElementById('timer-display');
     
     stressAudio.loop = false;
+    stressAudio.volume = 0.15;
+
+    bellAudio.volume = 1;
 
     timerInterval = setInterval(() => {
         const targetStr = localStorage.getItem(STORAGE_KEY_TIME);
@@ -149,7 +152,6 @@ function startCountdownLogic() {
                 timerText.style.color = "red";
                 
                 if (stressAudio.paused) {
-                    stressAudio.volume = 0.5;
                     const offset = (5 * 60) - (diff / 1000);
 
                     if (stressAudio.readyState >= 1) {
@@ -250,3 +252,10 @@ function activateGlitchMode(active) {
 }
 
 init();
+
+function doGlitchShort() {
+    activateGlitchMode(true);
+    setTimeout(() => {
+        activateGlitchMode(false);
+    }, 200);
+}
