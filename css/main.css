@@ -17,7 +17,7 @@ body {
     height: 18px;
     padding: 6px;
     &:hover {
-        background-color: #ebedef;
+        background-color: #f1f3f4;
         border-radius: 50%;
     }
 }

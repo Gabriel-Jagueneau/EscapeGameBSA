@@ -16,8 +16,8 @@
         height: 16px;
         margin-bottom: 14.5px;
         background-color: #cccfd2;
-        margin-left: 2px;
-        margin-right: 2px;
+        margin-left: 1.5px;
+        margin-right: 1.5px;
         transition: ease 0.2s;
     }
     & .add-onglet {
@@ -31,6 +31,7 @@
         height: 36px;
         width: 36px;
         margin-bottom: 5px;
+        transition: ease 0.2s;
         & img {
             width: 16px;
             height: auto;
@@ -72,7 +73,7 @@
         justify-content: center;
         border-radius: 50%;
         margin-bottom: 2px;
-        transform: translateY(-2px);
+        transform: translateY(-1px);
     }
     &:hover {
         transition: background-color ease 0.2s, height step-start 0.2s, padding step-start 0.2s, margin step-start 0.2s, border-radius step-start 0.2s;
@@ -117,7 +118,7 @@
     }
 }
 
-.SEPARATOR:has(+ .tab.active), .SEPARATOR:has(+ .tab:hover) {
+.SEPARATOR:has(+ .tab.active), .SEPARATOR:has(+ .tab:hover), .SEPARATOR:has(+ .add-onglet:hover) {
     opacity: 0;
     pointer-events: none;
 }
@@ -141,9 +142,13 @@
 
 .nav-buttons {
     display: flex;
-    gap: 4px;
+    gap: 2px;
     color: #5f6368;
     padding-left: 4px;
+    cursor: pointer;
+    & img {
+        padding: 10px;
+    }
 }
 
 .addresses-bar {
@@ -189,15 +194,19 @@
 .profile-section {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
     padding-right: 4px;
     color: #5f6368;
+    cursor: pointer;
+    & img {
+        padding: 10px;
+    }
     & span {
         width: 2px;
         height: 20px;
-        margin: 0 8px;
+        margin: 0 6px;
         border-radius: 100px;
-        background-color: #e0e0e0;
+        background-color: #f1f3f4;
     }
 }
 
