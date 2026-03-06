@@ -41,12 +41,12 @@
 
 .tab {
     background-color: transparent;
-    height: 40px;
+    height: 38px;
     width: 240px;
     border-radius: 12px 12px 0 0;
     display: flex;
     align-items: center;
-    padding: 0 5px 0 8px;
+    padding: 0 5px 2px 8px;
     font-size: 14px;
     color: #3c4043;
     position: relative;
@@ -64,16 +64,19 @@
         border-radius: 12px;
         cursor: pointer;
         height: 30px;
+        align-items: center;
         margin-bottom: 5px;
+        padding: 2px 5px 1px 8px;
     }
 }
 
 .tab.active {
     background-color: #ffffff;
     border-radius: 12px 12px 0 0;
-    height: 40px;
+    height: 38px;
     position: relative;
     margin-bottom: 0px;
+    padding: 0 5px 2px 8px;
     &::before {
         content: '';
         position: absolute;
