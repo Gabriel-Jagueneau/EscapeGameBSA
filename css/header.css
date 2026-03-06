@@ -2,7 +2,7 @@
 
 .browser-header {
     background-color: #dee1e6;
-    padding-top: 6px;
+    padding-top: 5px;
 }
 
 /*  ----  */
@@ -10,24 +10,26 @@
 .tab-bar {
     display: flex;
     align-items: flex-end;
-    padding-left: 6px;
-    gap: 4px;
+    padding-left: 5px;
     & .SEPARATOR {
-        width: 2px;
+        width: 2.5px;
         height: 16px;
-        margin-bottom: 12.5px;
+        margin-bottom: 14.5px;
         background-color: #cccfd2;
+        margin-left: 2px;
+        margin-right: 2px;
+        transition: ease 0.2s;
     }
     & .add-onglet {
         background-color: transparent;
-        border-radius: 12px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: #3c4043;
         cursor: pointer;
-        height: 30px;
-        width: 30px;
+        height: 36px;
+        width: 36px;
         margin-bottom: 5px;
         & img {
             width: 16px;
@@ -46,27 +48,41 @@
     border-radius: 12px 12px 0 0;
     display: flex;
     align-items: center;
-    padding: 0 5px 2px 8px;
+    padding: 2px 5px 2px 8px;
     font-size: 14px;
     color: #3c4043;
     position: relative;
     cursor: default;
+    transition: background-color ease 0.2s, height step-end 0.2s, padding step-end 0.2s, margin step-end 0.2s, border-radius step-end 0.2s;
     & .front {
         display: flex;
         flex-direction: row;
         align-items: center;
+        transform: translateY(-2px);
         & .logo {
             margin-right: 8px;
         }
     }
+    & .tab-close {
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-bottom: 2px;
+        transform: translateY(-2px);
+    }
     &:hover {
+        transition: background-color ease 0.2s, height step-start 0.2s, padding step-start 0.2s, margin step-start 0.2s, border-radius step-start 0.2s;
         background-color: #f6f6f6;
         border-radius: 12px;
         cursor: pointer;
         height: 30px;
         align-items: center;
         margin-bottom: 5px;
-        padding: 1px 5px 1px 8px;
+        padding: 4px 5px 1px 8px;
     }
 }
 
@@ -81,35 +97,34 @@
         content: '';
         position: absolute;
         bottom: 0;
-        left: -12px;
-        width: 12px;
-        height: 12px;
+        left: -14px;
+        width: 14px;
+        height: 14px;
         background-color: transparent;
-        border-bottom-right-radius: 12px;
+        border-bottom-right-radius: 14px;
         box-shadow: 5px 5px 0 5px #ffffff;
     }
     &::after {
         content: '';
         position: absolute;
         bottom: 0;
-        right: -12px;
-        width: 12px;
-        height: 12px;
+        right: -14px;
+        width: 14px;
+        height: 14px;
         background-color: transparent;
-        border-bottom-left-radius: 12px;
+        border-bottom-left-radius: 14px;
         box-shadow: -5px 5px 0 5px #ffffff;
     }
 }
 
-.tab-close {
-    margin-left: auto;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    margin-bottom: 2px;
+.SEPARATOR:has(+ .tab.active), .SEPARATOR:has(+ .tab:hover) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tab.active + .SEPARATOR, .tab:hover + .SEPARATOR {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /*  ----  */

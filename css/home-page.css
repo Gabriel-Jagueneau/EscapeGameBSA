@@ -267,7 +267,7 @@ section {
     position: fixed;
     bottom: 35px; 
     left: 50%; 
-    transform: translateX(-50%);
+    transform: translateX(-53%);
     z-index: 100;
     background: var(--glass);
     backdrop-filter: blur(20px);
