@@ -13,7 +13,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
     <link rel="icon" href="storage/images/bsa.png">
 
     <link rel="stylesheet" href="css/header.css"/>
-    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="stylesheet" href="css/login-game.css"/>
     <link rel="stylesheet" href="css/main.css"/>
     <link rel="stylesheet" href="css/home-page.css"/>
 </head>
@@ -152,41 +152,45 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                     <div class="glow-blob blob-2"></div>
                     <div class="glow-blob blob-3"></div>
                 </div>
-                <img src="storage/images/logo-innovagriagro.png" alt="" class="logo-login">
-                <h2>Veuillez vous authentifier</h2>
-                <div class="auth-golb">
-                    <div class="group-auth">
-                        <img src="storage/icons/user-fill.png" alt="" class="logo-4 icon-pass">
-                        <input type="text" id="login-user" placeholder="Identifiant">
-                    </div>
-                    <div class="group-auth">
-                        <img src="storage/icons/lock-fill.png" alt="" class="logo-4 icon-pass">
-                        <input type="password" id="login-pass" placeholder="Mot de passe">
-                    </div>
-                    <!-- 
-                    <div class="group-auth">
-                        <div class="group-checkbox">
-                            <input type="checkbox" class="checkbox">
+                <div class="login-box">
+                    <svg viewBox="0 0 1690 1790">
+                        <g stroke="currentColor" stroke-width="60" stroke-linecap="round">
+                            <line class="ray" x1="845" y1="230"  x2="845" y2="370" /> 
+                            <line class="ray" x1="380" y1="440"  x2="480" y2="530" /> 
+                            <line class="ray" x1="1300" y1="420" x2="1210" y2="530" /> 
+                            <line class="ray" x1="190" y1="900"  x2="340" y2="900" /> 
+                            <line class="ray" x1="1510" y1="900" x2="1340" y2="900" /> 
+                            <line class="ray" x1="350" y1="1360" x2="480" y2="1270" /> 
+                            <line class="ray" x1="1340" y1="1360" x2="1210" y2="1270" /> 
+                        </g>
+                        
+                        <g transform="translate(160,1690) scale(0.8,-0.8)" stroke="none" fill="currentColor">
+                            <path d="M711 1514 c-83 -22 -150 -63 -222 -134 -107 -106 -156 -235 -146 -390 7 -115 32 -176 128 -312 45 -62 94 -139 110 -171 42 -83 56 -87 283 -87 102 0 196 4 210 10 17 6 36 30 57 72 17 35 62 106 100 159 38 53 81 122 95 153 125 273 -37 611 -335 700 -68 20 -206 20 -280 0z m-50 -305 c91 -23 182 -116 214 -219 7 -23 4 -21 -31 13 -21 21 -63 54 -92 75 -53 36 -54 36 -69 17 -13 -18 -12 -22 13 -40 67 -48 116 -101 141 -154 27 -54 28 -63 31 -230 4 -185 3 -191 -45 -191 -23 0 -23 1 -23 140 l0 140 -47 0 c-66 1 -126 30 -158 78 -16 24 -37 86 -56 163 -16 68 -37 142 -45 164 -9 22 -16 42 -15 45 1 9 75 17 111 13 19 -3 51 -9 71 -14z m534 -321 c5 -5 -44 -130 -73 -187 -41 -83 -192 -92 -192 -12 0 82 65 173 141 199 31 10 114 10 124 0z"/>
+                            <path d="M670 290 l0 -50 185 0 185 0 0 50 0 50 -185 0 -185 0 0 -50z"/>
+                            <path d="M670 149 c0 -6 17 -29 39 -50 l39 -39 117 0 117 0 29 31 c16 17 29 40 29 50 0 18 -10 19 -185 19 -130 0 -185 -3 -185 -11z"/>
+                        </g>
+                    </svg>
+
+                    <h2>Veuillez vous authentifier</h2>
+                    <div class="auth-golb">
+                        <div class="group-auth">
+                            <img src="storage/icons/user-fill.png" alt="" class="logo-4 icon-pass">
+                            <input type="text" id="login-user" placeholder="Identifiant">
                         </div>
-                        <div class="checkbox-label">Voir mes dernières connexions</div>
+                        <div class="group-auth">
+                            <img src="storage/icons/lock-fill.png" alt="" class="logo-4 icon-pass">
+                            <input type="password" id="login-pass" placeholder="Mot de passe">
+                        </div>
                     </div>
-                    -->
+                    <button onclick="attemptLogin()">
+                        <img src="storage/icons/log-in-white.png" alt="" class="logo-small">
+                        Se connecter
+                    </button>
+                    <div class="forget-pass" onclick="doGlitchShort()">
+                        <img src="storage/icons/ambulance-fill-white.png" alt="" class="logo-small">
+                        Mot de passe oublié ?
+                    </div>
                 </div>
-                <button onclick="attemptLogin()">
-                    <img src="storage/icons/log-in-white.png" alt="" class="logo-small">
-                    Se connecter
-                </button>
-                <div class="forget-pass" onclick="doGlitchShort()">
-                    <img src="storage/icons/ambulance-fill-white.png" alt="" class="logo-small">
-                    Mot de passe oublié ?
-                </div>
-                <!--    
-                <div class="warning-section">
-                    <span>Attention au risque d'usurpation de votre "Compte BxScAgro" !</span>
-                    <span>Avant de saisir votre mot de passe, vérifiez que l'url affichée dans la barre d'adresse du navigateur commence bien par : <img src="storage/images/authinfourl.png" alt=""></span>
-                </div>
-                -->
-                
             </div>
     
             <div id="section-video-intro" class="section">
@@ -277,7 +281,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                         </p>
                     </div>
                     <div class="visual">
-                        <img src="" class="visual-img">
+                        <img src="storage/images/logo-innovagriagro.png" class="visual-img">
                     </div>
                 </section>
 
@@ -298,7 +302,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                         </p>
                     </div>
                     <div class="visual">
-                        <img src="" class="visual-img">
+                        <img src="storage/images/logo-innovagriagro.png" class="visual-img">
                     </div>
                 </section>
 
@@ -319,7 +323,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                         </p>
                     </div>
                     <div class="visual">
-                        <img src="" class="visual-img">
+                        <img src="storage/images/logo-innovagriagro.png" class="visual-img">
                     </div>
                 </section>
 
@@ -341,7 +345,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                         </p>
                     </div>
                     <div class="visual">
-                        <img src="" class="visual-img">
+                        <img src="storage/images/logo-innovagriagro.png" class="visual-img">
                     </div>
                 </section>
 
@@ -362,7 +366,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                         </p>
                     </div>
                     <div class="visual">
-                        <img src="" class="visual-img">
+                        <img src="storage/images/logo-innovagriagro.png" class="visual-img">
                     </div>
                 </section>
 
@@ -384,7 +388,7 @@ Libre de droits : modification et exploitation (personnelle et/ou commerciale) a
                         </p>
                     </div>
                     <div class="visual">
-                        <img src="" class="visual-img">
+                        <img src="storage/images/logo-innovagriagro.png" class="visual-img">
                     </div>
                 </section>
 

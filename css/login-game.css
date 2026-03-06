@@ -17,6 +17,21 @@
         height: 140px;
         margin-bottom: 20px;
     }
+    & svg {
+        color: var(--sage);
+        height: 280px;
+        margin-bottom: 20px;
+    }
+    & .login-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: color-mix(in srgb, var(--sage), transparent 90%);
+        backdrop-filter: blur(10px);
+        padding: 40px 100px;
+        border-radius: 32px;
+        box-shadow: 0 15px 30px 1px color-mix(in srgb, var(--sage), transparent 85%);
+    }
     & h2 {
         color: #555;
         margin-bottom: 50px;
@@ -54,23 +69,6 @@
             padding: 16px;
             background: var(--sage);
         }
-        /*& .group-checkbox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #dadada;
-            height: 100%;
-            & .checkbox {
-                margin: 12px 11px;
-                width: 14px;
-                height: 14px;
-            }
-        }
-        & .checkbox-label {
-            font-size: 16px;
-            color: #707070;
-            padding-left: 16px;
-        }*/
     }
     & button {
         display: inline-block;
@@ -110,36 +108,15 @@
         color: #333;
         margin-top: 50px;
         font-size: 16px;
+        & img {
+            filter: invert(1);
+            transform: translateY(2px);
+        }
         &:hover {
             text-decoration: underline;
             cursor: pointer;
         }
     }
-    /*& .warning-section {
-        display: flex;
-        align-items: center;
-        gap: 0px;
-        flex-direction: column;
-        color: #ffffff;
-        margin-top: 30px;
-        font-weight: normal;
-        font-size: 16px;
-        font-style: italic;
-        & span {
-            display: flex;
-            align-items: center;
-            color: #ffffff;
-            margin-top: 0;
-            padding: 0;
-            font-size: 16px;
-            & img {
-                height: 20px;
-                width: auto;
-                padding: 5px 6px;
-                margin-left: 2px;
-            }
-        }
-    }*/
 }
 
 .background-section {

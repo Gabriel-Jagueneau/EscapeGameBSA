@@ -4,7 +4,7 @@ const username = '';
 
 const STORAGE_KEY_STATE = 'game_state';
 const STORAGE_KEY_TIME = 'target_time';
-const TIMER_DURATION_MS = 45 * 60 * 1000; 
+const TIMER_DURATION_MS = 1 * 60 * 1000; 
 
 const contentDiv = document.getElementById('incubateur-login');
 const sections = {

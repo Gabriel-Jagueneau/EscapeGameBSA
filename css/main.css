@@ -105,3 +105,29 @@ body {
 @keyframes blinker {
     50% { opacity: 0; }
 }
+
+/*  ----  */
+
+@keyframes hop {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+}
+
+.ray {
+    transform-origin: center;
+    animation: hop 1.5s ease-in-out infinite;
+}
+
+.ray:nth-child(1) { animation-delay: 0.0s; }
+.ray:nth-child(2) { animation-delay: 0.2s; }
+.ray:nth-child(3) { animation-delay: 0.4s; }
+.ray:nth-child(4) { animation-delay: 0.6s; }
+.ray:nth-child(5) { animation-delay: 0.8s; }
+.ray:nth-child(6) { animation-delay: 1.0s; }
+.ray:nth-child(7) { animation-delay: 1.2s; }

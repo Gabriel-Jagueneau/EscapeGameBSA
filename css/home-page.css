@@ -50,8 +50,12 @@
 
 .bg-watermark-container {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: -3; overflow: hidden;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    z-index: -3; 
+    overflow: hidden;
 }
 
 .bg-watermark-img {
@@ -61,11 +65,11 @@
     width: 70%; height: 70%;
     object-fit: contain;
     opacity: 0;
-    filter: blur(60px) grayscale(60%);
+    filter: blur(60px);
     transition: opacity 1.2s ease-in-out;
 }
 
-.bg-watermark-img.active { opacity: 0.12; }
+.bg-watermark-img.active { opacity: 0.10; }
 
 /* --- STRUCTURE DE SCROLL --- */
 .main-container {
@@ -178,19 +182,16 @@ section {
 }
 
 .visual {
-    display: flex; justify-content: center;
-    opacity: 0; transform: scale(0.8);
-    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.visual-img { 
-    max-width: 85%; 
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.15)); 
+    display: flex; 
+    justify-content: center;
+    opacity: 0; 
+    transform: scale(0);
+    transition: all 1s cubic-bezier(1,0,.59,1.41);
 }
 
 .company-section.active .visual { 
     opacity: 1; 
-    transform: scale(1);
+    transform: scale(1.5);
 }
 
 .info-box {
