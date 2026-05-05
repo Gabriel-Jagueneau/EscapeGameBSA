@@ -189,7 +189,7 @@ section {
     transform: scale(0);
     transition: all 1s cubic-bezier(1,0,.59,1.41);
     & svg {
-        height: 400px;
+        height: 300px;
         color: var(--accent-current);
     }
 }
