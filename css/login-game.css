@@ -50,7 +50,7 @@
         overflow: hidden;
         background: color-mix(in srgb, var(--sage), transparent 80%);
         backdrop-filter: blur(10px);
-        & #login-user, #login-pass {
+        & #group-auth-login-user, #group-auth-login-pass {
             width: 350px;
             padding: 15px;
             border: transparent;

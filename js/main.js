@@ -1,6 +1,6 @@
 const code = '357845';
-const password = 'innovagriagro2.0';
-const username = 'innvo33';
+const password = "innov33";
+const username = "innovagriagro2.0";
 
 const STORAGE_KEY_STATE = 'game_state';
 const STORAGE_KEY_TIME = 'target_time';
@@ -46,8 +46,11 @@ function showSection(name) {
 }
 
 function attemptLogin() {
-    const u = document.getElementById('login-user');
-    const p = document.getElementById('login-pass');
+    const u = document.getElementById('group-auth-login-user');
+    const p = document.getElementById('group-auth-login-pass');
+
+    console.log(`Tentative de login avec: ${u.value} / ${p.value}`);
+    console.log(`Attendu: ${username} / ${password}`);
     
     if (u.value === username && p.value === password) {
         transitionToIntro();
