@@ -1,6 +1,6 @@
-const code = '';
-const password = '';
-const username = '';
+const code = '357845';
+const password = 'innovagriagro2.0';
+const username = 'innvo33';
 
 const STORAGE_KEY_STATE = 'game_state';
 const STORAGE_KEY_TIME = 'target_time';
