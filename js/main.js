@@ -1,6 +1,6 @@
 const code = '357845';
-const password = "innov33";
 const username = "innovagriagro2.0";
+const password = "innov33";
 
 const STORAGE_KEY_STATE = 'game_state';
 const STORAGE_KEY_TIME = 'target_time';
@@ -114,7 +114,7 @@ function startCountdownLogic() {
     const timerText = document.getElementById('timer-display');
     
     stressAudio.loop = false;
-    stressAudio.volume = 0.15;
+    stressAudio.volume = 0.5;
 
     bellAudio.volume = 1;
 
