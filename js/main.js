@@ -147,8 +147,6 @@ function startCountdownLogic() {
             const seconds = Math.floor((diff % 60000) / 1000);
             timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-            console.log(minutes, seconds);
-
             if (minutes === 30 && seconds === 0) {
                 bellAudio_30m.currentTime = 0;
                 bellAudio_30m.play().catch(() => { });
