@@ -4,7 +4,7 @@ const password = "innov33";
 
 const STORAGE_KEY_STATE = 'game_state';
 const STORAGE_KEY_TIME = 'target_time';
-const TIMER_DURATION_MS = 45 * 60 * 1000; 
+const TIMER_DURATION_MS = 45 * 60 * 1000;
 
 const contentDiv = document.getElementById('incubateur-login');
 const sections = {
@@ -23,7 +23,7 @@ let isFinished = false;
 
 function init() {
     const state = localStorage.getItem(STORAGE_KEY_STATE) || 'login';
-    
+
     if (state === 'intro') {
         showSection('intro');
         setTimeout(transitionToTimer, 2000);
@@ -51,7 +51,7 @@ function attemptLogin() {
 
     console.log(`Tentative de login avec: ${u.value} / ${p.value}`);
     console.log(`Attendu: ${username} / ${password}`);
-    
+
     if (u.value === username && p.value === password) {
         transitionToIntro();
     } else {
@@ -69,7 +69,7 @@ function attemptLogin() {
 // Étape 1 : Glitch -> Intro
 function transitionToIntro() {
     contentDiv.classList.add('glitch-active');
-    
+
     setTimeout(() => {
         contentDiv.classList.remove('glitch-active');
         localStorage.setItem(STORAGE_KEY_STATE, 'intro');
@@ -82,7 +82,7 @@ function transitionToIntro() {
             transitionToTimer();
         };
 
-    }, 250); 
+    }, 250);
 }
 
 // Étape 2 : Intro -> Glitch -> Timer
@@ -91,16 +91,16 @@ function transitionToTimer() {
 
     setTimeout(() => {
         contentDiv.classList.remove('glitch-active');
-        
+
         let targetTime = localStorage.getItem(STORAGE_KEY_TIME);
         if (!targetTime) {
             targetTime = Date.now() + TIMER_DURATION_MS;
             localStorage.setItem(STORAGE_KEY_TIME, targetTime);
         }
-        
+
         localStorage.setItem(STORAGE_KEY_STATE, 'timer');
         showSection('timer');
-        
+
         startCountdownLogic();
         scheduleRandomGlitch();
 
@@ -110,13 +110,13 @@ function transitionToTimer() {
 function startCountdownLogic() {
     clearInterval(timerInterval);
     const stressAudio = document.getElementById('snd-stress');
-    const bellAudio = document.getElementById('snd-bell');
+    const bellAudio_30m = document.getElementById('snd-bell-30m');
     const timerText = document.getElementById('timer-display');
-    
+
     stressAudio.loop = false;
     stressAudio.volume = 0.5;
 
-    bellAudio.volume = 1;
+    bellAudio_30m.volume = 1;
 
     timerInterval = setInterval(() => {
         const targetStr = localStorage.getItem(STORAGE_KEY_TIME);
@@ -147,13 +147,25 @@ function startCountdownLogic() {
             const seconds = Math.floor((diff % 60000) / 1000);
             timerText.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-            if ((minutes === 30 || minutes === 15) && seconds === 0) {
-                bellAudio.play().catch(() => {});
+            console.log(minutes, seconds);
+
+            if (minutes === 30 && seconds === 0) {
+                bellAudio_30m.currentTime = 0;
+                bellAudio_30m.play().catch(() => { });
+            }
+
+            if (minutes === 10 && seconds === 0) {
+                bellAudio_30m.currentTime = 0;
+                bellAudio_30m.play().catch(() => { });
+            }
+
+            if (diff <= 10 * 60 * 1000) {
+                timerText.style.color = "red";
+            } else {
+                timerText.style.color = "#fff";
             }
 
             if (diff <= 5 * 60 * 1000) {
-                timerText.style.color = "red";
-                
                 if (stressAudio.paused) {
                     const offset = (5 * 60) - (diff / 1000);
 
@@ -163,12 +175,10 @@ function startCountdownLogic() {
                     } else {
                         stressAudio.addEventListener('loadedmetadata', () => {
                             stressAudio.currentTime = offset;
-                            stressAudio.play().catch(() => {});
+                            stressAudio.play().catch(() => { });
                         }, { once: true });
                     }
                 }
-            } else {
-                timerText.style.color = "#fff";
             }
         }
     }, 1000);
@@ -180,7 +190,7 @@ function scheduleRandomGlitch() {
 
     glitchTimeout = setTimeout(() => {
         if (localStorage.getItem(STORAGE_KEY_STATE) === 'timer') {
-            
+
             contentDiv.classList.add('glitch-active');
             setTimeout(() => {
                 contentDiv.classList.remove('glitch-active');
@@ -197,10 +207,10 @@ function checkCode() {
 
     if (codeEntered === code) {
         isFinished = true;
-        
+
         timerText.style.color = "rgb(55, 212, 71)";
         timerText.classList.remove('blink');
-        
+
         if (stressAudio.duration) {
             stressAudio.currentTime = stressAudio.duration - 11;
             stressAudio.play()
@@ -220,17 +230,17 @@ function triggerFail() {
     clearInterval(timerInterval);
     clearTimeout(glitchTimeout);
     document.getElementById('snd-stress').pause();
-    
+
     localStorage.setItem(STORAGE_KEY_STATE, 'fail');
     showSection('fail');
-    activateGlitchMode(true); 
+    activateGlitchMode(true);
     setTimeout(() => {
         activateGlitchMode(false);
     }, 250);
-    
+
     const vid = document.getElementById('vid-fail');
-    if (vid) { 
-        vid.play(); 
+    if (vid) {
+        vid.play();
     }
 }
 
@@ -242,10 +252,10 @@ function triggerSuccess() {
     localStorage.setItem(STORAGE_KEY_STATE, 'success');
     showSection('success');
     activateGlitchMode(false);
-    
+
     const vid = document.getElementById('vid-success');
-    if (vid) { 
-        vid.play(); 
+    if (vid) {
+        vid.play();
     }
 }
 

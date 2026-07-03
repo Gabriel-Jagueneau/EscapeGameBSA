@@ -11,7 +11,10 @@
 /* --- BACKGROUND & CANVAS --- */
 .bg-animations {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: -1;
     pointer-events: none;
     overflow: hidden;
@@ -30,18 +33,44 @@
     animation: float-blobs 20s infinite alternate;
 }
 
-.blob-1 { top: -100px; left: -100px; animation-delay: 0s; }
-.blob-2 { bottom: -100px; right: -100px; animation-delay: -5s; background: var(--charcoal); opacity: 0.05; }
-.blob-3 { top: 40%; left: 60%; width: 250px; height: 250px; animation-delay: -10s; }
+.blob-1 {
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -5s;
+    background: var(--charcoal);
+    opacity: 0.05;
+}
+
+.blob-3 {
+    top: 40%;
+    left: 60%;
+    width: 250px;
+    height: 250px;
+    animation-delay: -10s;
+}
 
 @keyframes float-blobs {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(100px, 50px) scale(1.2); }
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(100px, 50px) scale(1.2);
+    }
 }
 
 .bg-grid {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: radial-gradient(var(--border) 1px, transparent 1px);
     background-size: 40px 40px;
     opacity: 0.2;
@@ -50,26 +79,30 @@
 
 .bg-watermark-container {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100vw; 
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
-    z-index: -3; 
+    z-index: -3;
     overflow: hidden;
 }
 
 .bg-watermark-img {
     position: absolute;
-    top: 50%; left: 50%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(1.1);
-    width: 70%; height: 70%;
+    width: 70%;
+    height: 70%;
     object-fit: contain;
     opacity: 0;
     filter: blur(60px);
     transition: opacity 1.2s ease-in-out;
 }
 
-.bg-watermark-img.active { opacity: 0.10; }
+.bg-watermark-img.active {
+    opacity: 0.10;
+}
 
 /* --- STRUCTURE DE SCROLL --- */
 .main-container {
@@ -85,7 +118,8 @@ section {
     height: 90vh;
     scroll-snap-align: start;
     position: relative;
-    overflow: hidden; /* Important pour les animations de texte */
+    overflow: hidden;
+    /* Important pour les animations de texte */
 }
 
 /* --- HERO SECTION CORRIGÉE --- */
@@ -102,7 +136,8 @@ section {
 .hero-content {
     z-index: 10;
     max-width: 1100px;
-    opacity: 0; /* Caché par défaut */
+    opacity: 0;
+    /* Caché par défaut */
     transform: translateY(30px);
     transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
     display: flex;
@@ -143,7 +178,7 @@ section {
 }
 
 .hero-content p {
-    font-size: 24px;
+    font-size: 28px;
     max-width: 900px;
     margin: 0 auto;
     color: #555;
@@ -164,14 +199,14 @@ section {
     letter-spacing: 2px;
     font-size: 0.8rem;
     transition: all 0.4s;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     width: fit-content;
     align-self: center;
 }
 
 .cta-button:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 /* --- SECTIONS ENTREPRISES --- */
@@ -183,72 +218,81 @@ section {
 }
 
 .visual {
-    display: flex; 
+    display: flex;
     justify-content: center;
-    opacity: 0; 
+    opacity: 0;
     transform: scale(0);
-    transition: all 1s cubic-bezier(1,0,.59,1.41);
-    & svg {
-        height: 300px;
-        color: var(--accent-current);
+    transition: all 1s cubic-bezier(1, 0, .59, 1.41);
+
+    & img {
+        height: 350px;
+        width: auto;
+        object-fit: contain;
     }
 }
 
-.company-section.active .visual { 
-    opacity: 1; 
-    transform: scale(1.5);
+.company-section.active .visual {
+    opacity: 1;
+    transform: scale(1.2);
 }
 
 .info-box {
     padding: 50px;
-    opacity: 0; transform: translateX(50px);
+    opacity: 0;
+    transform: translateX(50px);
     transition: all 0.8s ease 0.3s;
+
     & .tag {
         font-family: Arial, sans-serif;
         text-transform: uppercase;
         letter-spacing: 4px;
-        font-size: 16px;
+        font-size: 18px;
         color: var(--accent-current);
         display: block;
     }
+
     & h2 {
-        font-size: 50px;
+        font-size: 60px;
         font-weight: 600;
         margin-top: 15px;
         margin-bottom: 0;
     }
+
     & h3 {
-        font-size: 22px;
+        font-size: 26px;
         font-weight: 400;
         margin-bottom: 20px;
         margin-top: 0;
         color: #555;
     }
+
     & p {
-        font-size: 18px;
+        font-size: 22px;
         line-height: 1.6;
         color: #333;
     }
+
     & .enjeux {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         gap: 5px;
         margin-bottom: 25px;
+
         & .block {
             background: color-mix(in srgb, var(--accent-current), transparent 90%);
             color: #333;
-            padding: 6px 10px;
+            padding: 10px 16px;
             border-radius: 30px;
             font-family: Arial, sans-serif;
-            font-size: 16px;
+            font-size: 22px;
             width: fit-content;
         }
     }
 }
 
-.company-section.active .info-box { 
-    opacity: 1; 
+.company-section.active .info-box {
+    opacity: 1;
     transform: translateX(0);
 }
 
@@ -263,16 +307,29 @@ section {
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(-10px);}
-    60% {transform: translateY(-5px);}
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
 }
 
 /* --- NAVIGATION DOCK (GLASSMORPSHISM) --- */
 .bottom-nav {
     position: fixed;
-    bottom: 35px; 
-    left: 50%; 
+    bottom: 35px;
+    left: 50%;
     transform: translateX(-53%);
     z-index: 100;
     background: var(--glass);
@@ -281,36 +338,72 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 50px;
     padding: 12px 16px;
-    display: flex; gap: 12px;
+    display: flex;
+    gap: 12px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
 }
 
 .nav-item {
-    text-decoration: none; 
+    text-decoration: none;
     color: var(--charcoal);
-    font-family: Arial, sans-serif; 
-    font-size: 16px; 
+    font-family: Arial, sans-serif;
+    font-size: 16px;
     font-weight: bold;
-    width: 38px; 
-    height: 38px; 
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     justify-content: center;
-    transition: all 0.4s; 
+    transition: all 0.4s;
     opacity: 0.4;
 }
 
-.nav-item.active { 
-    background: var(--accent-current); 
-    color: white; opacity: 1; 
+.nav-item.active {
+    background: var(--accent-current);
+    color: white;
+    opacity: 1;
     transform: scale(1.15);
 }
 
-body.theme-intro { --bg-current: #f9f7f2; --accent-current: #6b8e23; --border: #6b8e23; }
-body.theme-s1 { --bg-current: #f9e7e7; --accent-current: #ed6424; --border: #ed6424; }
-body.theme-s2 { --bg-current: #e7f2f9; --accent-current: #25ade3; --border: #25ade3; }
-body.theme-s3 { --bg-current: #eff9e7; --accent-current: #9ecd30; --border: #9ecd30; }
-body.theme-s4 { --bg-current: #f2e7f9; --accent-current: #870ea2; --border: #870ea2; }
-body.theme-s5 { --bg-current: #e7f9f6; --accent-current: #13ad8e; --border: #13ad8e; }
-body.theme-s6 { --bg-current: #f9e7f4; --accent-current: #f21f74; --border: #f21f74; }
+body.theme-intro {
+    --bg-current: #f9f7f2;
+    --accent-current: #6b8e23;
+    --border: #6b8e23;
+}
+
+body.theme-s1 {
+    --bg-current: #f9e7e7;
+    --accent-current: #ed6424;
+    --border: #ed6424;
+}
+
+body.theme-s2 {
+    --bg-current: #e7f2f9;
+    --accent-current: #25ade3;
+    --border: #25ade3;
+}
+
+body.theme-s3 {
+    --bg-current: #eff9e7;
+    --accent-current: #9ecd30;
+    --border: #9ecd30;
+}
+
+body.theme-s4 {
+    --bg-current: #f2e7f9;
+    --accent-current: #870ea2;
+    --border: #870ea2;
+}
+
+body.theme-s5 {
+    --bg-current: #e7f9f6;
+    --accent-current: #13ad8e;
+    --border: #13ad8e;
+}
+
+body.theme-s6 {
+    --bg-current: #f9e7f4;
+    --accent-current: #f21f74;
+    --border: #f21f74;
+}
